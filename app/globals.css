@@ -1,0 +1,190 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #08070b;
+  --color-ink: #ece7df;
+  --color-dim: #8a857c;
+  --color-ember: #ff5c28;
+  --color-line: rgba(236, 231, 223, 0.08);
+  --font-display: var(--font-syne), system-ui, sans-serif;
+  --font-serif: var(--font-instrument), Georgia, serif;
+  --font-mono: var(--font-plex-mono), "SF Mono", monospace;
+}
+
+:root {
+  --vh: 1vh;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  background: #08070b;
+  overflow-x: clip;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(236, 231, 223, 0.18) transparent;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background: var(--color-void);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  overflow-x: clip;
+}
+
+::selection {
+  background: #ff5c28;
+  color: #08070b;
+}
+
+/* ---- custom cursor: hide native on fine pointers ---- */
+@media (pointer: fine) {
+  body.has-cursor,
+  body.has-cursor a,
+  body.has-cursor button,
+  body.has-cursor [role="button"] {
+    cursor: none;
+  }
+}
+
+/* ---- film grain ---- */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -100%;
+  z-index: 300;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  animation: grain 0.9s steps(6) infinite;
+}
+
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -3%); }
+  60% { transform: translate(-2%, -2%); }
+  80% { transform: translate(3%, 3%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ---- outlined display text ---- */
+.text-stroke {
+  -webkit-text-stroke: 1px rgba(236, 231, 223, 0.55);
+  color: transparent;
+  transition: color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---- soft dark veil behind text-dense sections ---- */
+.section-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(8, 7, 11, 0.68) 16%,
+    rgba(8, 7, 11, 0.68) 84%,
+    transparent
+  );
+}
+
+/* ---- utility: mask reveal for split lines ---- */
+.line-mask {
+  display: block;
+  overflow: hidden;
+}
+
+.line-mask > span {
+  display: block;
+  will-change: transform;
+}
+
+/* ---- marquee ---- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee var(--marquee-speed, 40s) linear infinite;
+}
+
+/* ---- slow spin for dials ---- */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 14s linear infinite;
+}
+
+/* ---- scroll hint droplet ---- */
+@keyframes hint-fall {
+  0% { transform: translateY(-12px); }
+  100% { transform: translateY(40px); }
+}
+
+/* ---- preloader glyph flicker ---- */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  8% { opacity: 0.4; }
+  12% { opacity: 1; }
+  36% { opacity: 0.7; }
+  40% { opacity: 1; }
+}
+
+/* ---- focus rings (keyboard) ---- */
+a:focus-visible,
+button:focus-visible {
+  outline: 1.5px solid #ff5c28;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* skip link */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 500;
+  background: #ff5c28;
+  color: #08070b;
+  padding: 8px 16px;
+  font-size: 12px;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain::after,
+  .animate-marquee,
+  .animate-spin-slow {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto !important;
+  }
+}
