@@ -116,8 +116,12 @@ export default function Contact() {
             </a>
           </span>
         </div>
-        <p className="mt-3 text-center font-mono text-[9px] uppercase tracking-[0.2em] text-ink/25 md:text-left">
-          Designed & built by hand — no templates were harmed
+        <p className="mt-3 flex flex-col gap-1 text-center font-mono text-[9px] uppercase tracking-[0.2em] text-ink/25 md:flex-row md:justify-between md:text-left">
+          <span>Designed & built by hand — no templates were harmed</span>
+          <span>
+            COLOPHON: NEXT.JS · R3F · GLSL · GSAP · WEB AUDIO · 16,384 PARTICLES ·
+            SYNE / INSTRUMENT / PLEX MONO
+          </span>
         </p>
       </footer>
     </section>

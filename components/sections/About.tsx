@@ -3,10 +3,10 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
 import { RevealLines, Line, Rise, SectionLabel } from "@/components/ui/Split";
 import { calmMode } from "@/lib/calm";
 import GitHubLive from "@/components/GitHubLive";
+import PortraitReveal from "@/components/PortraitReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -106,22 +106,14 @@ export default function About() {
               ref={cardRef}
               onPointerMove={tilt}
               onPointerLeave={untilt}
-              data-cursor="HELLO"
+              data-cursor="REVEAL"
               className="relative aspect-[4/5] w-full max-w-xs overflow-hidden rounded-sm border border-line will-change-transform"
               style={{ transformStyle: "preserve-3d" }}
             >
-              <Image
-                src="/img/ppp.jpg"
-                alt="Nikola Anastasijević"
-                fill
-                className="object-cover object-top"
-                sizes="(max-width: 768px) 80vw, 320px"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-void/60 via-transparent to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4 font-mono text-[9px] uppercase tracking-[0.22em] text-ink/70">
+              <PortraitReveal src="/img/ppp.jpg" alt="Nikola Anastasijević" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between p-4 font-mono text-[9px] uppercase tracking-[0.22em] text-ink/70">
                 <span>SELF-PORTRAIT</span>
-                <span>2026</span>
+                <span>PASS YOUR CURSOR</span>
               </div>
             </div>
           </Rise>

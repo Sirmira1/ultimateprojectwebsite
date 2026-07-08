@@ -4,8 +4,8 @@ import { SKILLS } from "@/lib/data";
 import { SectionLabel, Rise } from "@/components/ui/Split";
 
 const MARQUEE = [
-  "TYPESCRIPT", "PYTHON", "C#", "REACT", "NEXT.JS", "REACT NATIVE",
-  ".NET", "SUPABASE", "STRIPE", "MAPBOX",
+  "TYPESCRIPT", "JAVA", "PYTHON", "C#", "SWIFT", "PHP", "REACT",
+  "NEXT.JS", "REACT NATIVE", ".NET", "LARAVEL", "MYSQL", "UNITY", "SUPABASE",
 ];
 
 export default function Skills() {

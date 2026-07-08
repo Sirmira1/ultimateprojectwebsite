@@ -129,7 +129,7 @@ export default function Intro() {
 
         <div
           ref={captionRef}
-          className="mt-6 text-center font-mono text-[10px] uppercase tracking-[0.35em] text-dim opacity-0"
+          className="mt-12 text-center font-mono text-[10px] uppercase tracking-[0.35em] text-dim opacity-0 md:mt-6"
         >
           Nikola Anastasijević
           <span className="mx-3 text-ember">/</span>

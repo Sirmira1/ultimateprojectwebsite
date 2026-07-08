@@ -78,22 +78,22 @@ export const SKILLS: SkillGroup[] = [
   {
     label: "LANGUAGE",
     note: "The grammar",
-    items: ["TypeScript", "Python", "C#", "SQL"],
+    items: ["TypeScript", "JavaScript", "Java", "Python", "C#", "Swift", "PHP", "SQL", "HTML / CSS"],
   },
   {
-    label: "FRONTEND",
-    note: "The face",
-    items: ["React", "Next.js", "Angular", "React Native", "TailwindCSS"],
+    label: "FRAMEWORK",
+    note: "The skeleton",
+    items: ["React", "Next.js", "Angular", "React Native", "Node", ".NET / ASP.NET", "Laravel", "TailwindCSS"],
   },
   {
-    label: "BACKEND",
+    label: "DATA & CLOUD",
     note: "The engine room",
-    items: ["Node", ".NET", "Supabase", "Azure DevOps"],
+    items: ["MySQL", "Supabase", "Azure DevOps", "Vercel", "Stripe", "Mapbox"],
   },
   {
-    label: "SHIPPING",
-    note: "The habit",
-    items: ["Stripe", "Mapbox", "Expo", "Vercel", "Git"],
+    label: "ALSO FLUENT IN",
+    note: "The range",
+    items: ["Unity", "WordPress", "Expo", "Git"],
   },
 ];
 

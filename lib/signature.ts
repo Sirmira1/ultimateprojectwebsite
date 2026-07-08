@@ -29,6 +29,18 @@ export const SIG_PATHS: { d: string; ember?: boolean }[] = [
 const gauss = () => Math.random() + Math.random() + Math.random() - 1.5;
 
 /**
+ * How much the signature shrinks to fit the viewport at the intro
+ * camera (z=12.5, fov 50°): 1 on desktop, ~0.45 on phones. Particle
+ * sizes and dust spread scale with it so density stays constant.
+ */
+export function signatureScale(): number {
+  if (typeof window === "undefined") return 1;
+  const viewH = 2 * Math.tan((50 * Math.PI) / 360) * 12.5;
+  const viewW = viewH * (window.innerWidth / Math.max(window.innerHeight, 1));
+  return Math.min(12, viewW * 0.9) / 12;
+}
+
+/**
  * Samples `count` points along the signature (in pen order) into world
  * coordinates. Returns positions (xyz per point). Because points are laid
  * down sequentially, particle i's pen-progress is simply i/count.
@@ -53,8 +65,9 @@ export function sampleSignature(count: number): Float32Array {
   const lengths = els.map((el) => el.getTotalLength());
   const total = lengths.reduce((a, b) => a + b, 0);
 
-  // world mapping: ~12 units wide, centered, y flipped
-  const S = 12 / 1000;
+  // world mapping: as wide as fits the viewport at the intro camera,
+  // capped at 12 units on wide screens, y flipped
+  const S = (12 * signatureScale()) / 1000;
   const CX = 512;
   const CY = 234;
 

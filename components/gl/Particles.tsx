@@ -4,7 +4,7 @@ import { useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { world, NUM_SHAPES, SECTION_PALETTES, SECTION_OPACITY } from "@/lib/world";
-import { sampleSignature } from "@/lib/signature";
+import { sampleSignature, signatureScale } from "@/lib/signature";
 import { audio } from "@/lib/audio";
 
 /* ------------------------------------------------------------------ */
@@ -212,6 +212,7 @@ uniform float uIntro;
 uniform float uForce;
 uniform float uVel;
 uniform float uDraw;
+uniform float uSigK;
 uniform vec3 uMouse;
 uniform vec3 uClickPos;
 uniform float uClickTime;
@@ -250,7 +251,7 @@ void main() {
       sin(aT * 913.7 + aRand * 17.0),
       cos(aT * 547.3 + aRand * 11.0),
       sin(aT * 311.9 + aRand * 23.0)
-    ) * (1.3 + aRand * 3.2);
+    ) * (1.3 + aRand * 3.2) * uSigK;
     pA = mix(dust, pA, drawn);
     vFade = sig * (1.0 - drawn);
     tip = exp(-abs(aT - uDraw) * 90.0) * sig
@@ -301,6 +302,7 @@ void main() {
   gl_PointSize = uSize * uPixelRatio * (0.5 + aRand * 1.6)
     * (1.0 + force * 1.2 + tip * 2.0)
     * (1.0 - vFade * 0.45)
+    * mix(1.0, uSigK, sig)
     / max(-mv.z, 0.1);
 
   vRand = aRand;
@@ -371,6 +373,7 @@ export default function Particles() {
         uForce: { value: 0 },
         uVel: { value: 0 },
         uDraw: { value: 0 },
+        uSigK: { value: signatureScale() },
         uMouse: { value: new THREE.Vector3(999, 999, 0) },
         uClickPos: { value: new THREE.Vector3(0, 0, 0) },
         uClickTime: { value: -100 },
