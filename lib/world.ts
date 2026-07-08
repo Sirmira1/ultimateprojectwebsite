@@ -32,7 +32,7 @@ export const SECTION_PALETTES: [string, string][] = [
 ];
 
 /** Particle field opacity per section — the world recedes while you read. */
-export const SECTION_OPACITY = [1, 1, 0.7, 0.45, 0.4, 0.55, 0.75, 0.95];
+export const SECTION_OPACITY = [1, 1, 0.55, 0.4, 0.34, 0.45, 0.68, 0.95];
 
 /** Camera keyframes per section: position + lookAt. */
 export const CAMERA_KEYS: { pos: [number, number, number]; look: [number, number, number] }[] = [

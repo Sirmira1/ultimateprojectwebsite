@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { audio } from "@/lib/audio";
+import { calmMode } from "@/lib/calm";
 
 /**
  * Custom cursor: an ember dot + trailing ring. The ring inflates and
@@ -16,7 +17,7 @@ export default function Cursor() {
 
   useEffect(() => {
     const mq = window.matchMedia("(pointer: fine)");
-    if (!mq.matches) return;
+    if (!mq.matches || calmMode()) return;
     setFine(true);
     document.body.classList.add("has-cursor");
 

@@ -35,7 +35,7 @@ export default function Career() {
                     {entry.place}
                   </span>
                 </div>
-                <p className="max-w-md font-mono text-xs leading-relaxed text-dim transition-colors duration-500 group-hover:text-ink/80">
+                <p className="max-w-md font-mono text-sm leading-relaxed text-dim transition-colors duration-500 group-hover:text-ink/90">
                   {entry.note}
                 </p>
               </div>

@@ -84,7 +84,7 @@ export default function Hero() {
           <span className="text-ink/80">SOFTWARE DEVELOPER</span> — I FINISH THE THING
         </span>
         <span className="hidden text-right leading-relaxed sm:block">
-          EST. HAMILTON, ON
+          EST. HAMILTON, ONTARIO — CANADA
           <br />
           <span className="text-ink/50">SHIPPING SINCE DAY ZERO</span>
         </span>

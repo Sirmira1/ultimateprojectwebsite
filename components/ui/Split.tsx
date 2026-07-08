@@ -3,12 +3,11 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { calmMode } from "@/lib/calm";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const reduced = () =>
-  typeof window !== "undefined" &&
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduced = () => typeof window !== "undefined" && calmMode();
 
 /**
  * Splits text into characters wrapped in overflow masks and slides

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import gsap from "gsap";
+import { calmMode } from "@/lib/calm";
 
 /**
  * Wraps a child in a magnetic field — it leans toward the cursor
@@ -20,7 +21,7 @@ export default function Magnetic({
 
   const onMove = (e: React.PointerEvent) => {
     const el = ref.current;
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!el || calmMode()) return;
     const r = el.getBoundingClientRect();
     const x = e.clientX - (r.left + r.width / 2);
     const y = e.clientY - (r.top + r.height / 2);

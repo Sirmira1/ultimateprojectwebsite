@@ -3,7 +3,7 @@
 @theme {
   --color-void: #08070b;
   --color-ink: #ece7df;
-  --color-dim: #8a857c;
+  --color-dim: #9c968b;
   --color-ember: #ff5c28;
   --color-line: rgba(236, 231, 223, 0.08);
   --font-display: var(--font-syne), system-ui, sans-serif;
@@ -102,8 +102,8 @@ body {
   background: linear-gradient(
     180deg,
     transparent,
-    rgba(8, 7, 11, 0.68) 16%,
-    rgba(8, 7, 11, 0.68) 84%,
+    rgba(8, 7, 11, 0.78) 16%,
+    rgba(8, 7, 11, 0.78) 84%,
     transparent
   );
 }

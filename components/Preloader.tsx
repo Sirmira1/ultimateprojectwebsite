@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { world } from "@/lib/world";
+import { calmMode } from "@/lib/calm";
 
 const WORDS = [
   "CALIBRATING INSTRUMENTS",
@@ -26,7 +27,7 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
     document.documentElement.style.overflow = "hidden";
     window.scrollTo(0, 0);
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = calmMode();
     const t0 = performance.now();
     const DURATION = reduced ? 400 : 2400;
     let raf = 0;
@@ -90,7 +91,7 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
           </div>
           <div className="absolute bottom-8 flex w-full items-end justify-between px-8 font-mono text-[10px] uppercase tracking-[0.25em] text-dim/60">
             <span>N.A — PORTFOLIO</span>
-            <span>©2026 / HAMILTON, ON</span>
+            <span>©2026 / HAMILTON, ON — CANADA</span>
           </div>
         </motion.div>
       )}

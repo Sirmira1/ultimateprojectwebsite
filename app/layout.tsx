@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.nikolaanastasijevic.com"),
   title: "NIKOLA ANASTASIJEVIĆ — Developer. I ship things.",
   description:
-    "Software developer in Hamilton, ON. Web apps built end-to-end and actually shipped — Lusso Veloce, FlyBy, Project Garage, and a bot that trades gold. This portfolio is the playground.",
+    "Software developer in Hamilton, Ontario, Canada. Web apps built end-to-end and actually shipped — Lusso Veloce, FlyBy, Project Garage, and a bot that trades gold. This portfolio is the playground.",
   openGraph: {
     title: "NIKOLA ANASTASIJEVIĆ — Developer. I ship things.",
     description:

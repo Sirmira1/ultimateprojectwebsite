@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { world } from "@/lib/world";
 import { SIG_PATHS, SIG_VIEWBOX } from "@/lib/signature";
+import { calmMode } from "@/lib/calm";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,13 +18,27 @@ export default function Intro() {
   const sectionRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const captionRef = useRef<HTMLDivElement>(null);
+  const beginRef = useRef<HTMLDivElement>(null);
+
+  // fly through the signature for people who'd rather watch than scroll
+  const begin = () => {
+    const lenis = window.__lenis;
+    if (lenis) {
+      lenis.scrollTo("#hero", {
+        duration: 5,
+        easing: (t: number) => 1 - Math.pow(1 - t, 2.2),
+      });
+    } else {
+      document.querySelector("#hero")?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     const section = sectionRef.current;
     const svg = svgRef.current;
     if (!section || !svg) return;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = calmMode();
     const paths = Array.from(svg.querySelectorAll<SVGPathElement>("path"));
     const lengths = paths.map((p) => p.getTotalLength());
     const total = lengths.reduce((a, b) => a + b, 0);
@@ -69,6 +84,13 @@ export default function Intro() {
           const fadeIn = gsap.utils.clamp(0, 1, (p - 0.68) / 0.12);
           captionRef.current.style.opacity = `${fadeIn * fadeOut}`;
         }
+
+        // the begin button retires as soon as the visitor takes over
+        if (beginRef.current) {
+          const gone = p > 0.03;
+          beginRef.current.style.opacity = gone ? "0" : "1";
+          beginRef.current.style.pointerEvents = gone ? "none" : "auto";
+        }
       },
     });
 
@@ -111,7 +133,32 @@ export default function Intro() {
         >
           Nikola Anastasijević
           <span className="mx-3 text-ember">/</span>
-          Hamilton, ON
+          Hamilton, Ontario — Canada
+        </div>
+
+        <div
+          ref={beginRef}
+          className="absolute bottom-12 transition-opacity duration-700"
+        >
+          <button
+            onClick={begin}
+            data-cursor="GO"
+            className="group flex flex-col items-center gap-3 font-mono text-[10px] uppercase tracking-[0.35em] text-dim transition-colors hover:text-ink"
+            aria-label="Begin — scrolls through the intro for you"
+          >
+            <span className="relative flex h-11 w-11 items-center justify-center">
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 rounded-full border border-ink/25 transition-colors duration-300 group-hover:border-ember"
+              />
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 animate-ping rounded-full border border-ember/40 [animation-duration:2.4s]"
+              />
+              <span aria-hidden="true" className="text-sm text-ember">↓</span>
+            </span>
+            Begin
+          </button>
         </div>
       </div>
     </section>

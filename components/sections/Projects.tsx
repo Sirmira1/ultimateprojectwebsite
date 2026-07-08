@@ -34,6 +34,21 @@ export default function Projects() {
     };
   }, [hovered]);
 
+  // pointerleave never fires when the page scrolls away under a still
+  // pointer — drop the preview as soon as the section leaves the viewport
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) setHovered(null);
+      },
+      { threshold: 0.05 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   const active = hovered !== null ? PROJECTS[hovered] : null;
 
   return (
@@ -109,7 +124,7 @@ export default function Projects() {
                     >
                       <div className="overflow-hidden">
                         <div className="flex flex-wrap items-start justify-between gap-4 pt-6 pl-[calc(2.5rem)] md:pl-[calc(3.5rem+2.5vw)]">
-                          <p className="max-w-md font-mono text-xs leading-relaxed text-ink/80">
+                          <p className="max-w-md font-mono text-sm leading-relaxed text-ink/90">
                             {p.description}
                           </p>
                           <span className="flex gap-2">

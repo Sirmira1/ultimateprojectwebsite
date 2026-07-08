@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { EXPERIMENTS } from "@/lib/data";
+import { calmMode } from "@/lib/calm";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -104,7 +105,7 @@ export default function Playground() {
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (calmMode()) {
       setReduced(true);
       return;
     }
@@ -152,7 +153,7 @@ export default function Playground() {
               <br />
               AT <span className="font-serif italic text-ember">2AM</span>
             </h2>
-            <p className="max-w-xs font-mono text-xs leading-relaxed text-dim">
+            <p className="max-w-xs font-mono text-sm leading-relaxed text-dim">
               Experiments with no client, no brief, no deadline. This is where
               the techniques in the real work are born.
             </p>

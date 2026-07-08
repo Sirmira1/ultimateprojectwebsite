@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { PROJECTS, SKILLS, SOCIALS, EMAIL } from "@/lib/data";
 import { world } from "@/lib/world";
 import { audio } from "@/lib/audio";
+import { toggleCalm } from "@/lib/calm";
 
 type LogLine = { text: string; kind?: "in" | "ember" | "dim" };
 
@@ -24,6 +25,7 @@ const HELP: LogLine[] = [
   { text: "contact ......... start an email" },
   { text: "sign ............ leave your mark in the void" },
   { text: "boom ............ do not press" },
+  { text: "calm ............ toggle calm mode (no effects)" },
   { text: "sudo hire nikola  worth a try" },
   { text: "clear / exit" },
 ];
@@ -105,8 +107,8 @@ export default function Terminal() {
         break;
       case "whoami":
         print([
-          { text: "Nikola Anastasijević — software developer, Hamilton ON." },
-          { text: "Mohawk College (559) · co-op @ MBPSD · ships real things." },
+          { text: "Nikola Anastasijević — software developer, Hamilton, Ontario, Canada." },
+          { text: "Mohawk College (559) · co-op @ MPBSDP · ships real things." },
           { text: "Current status: probably building. Or driving.", kind: "dim" },
         ]);
         break;
@@ -163,6 +165,10 @@ export default function Terminal() {
         } else {
           print([{ text: "nice try. this incident will be reported.", kind: "dim" }]);
         }
+        break;
+      case "calm":
+        print([{ text: "switching mode…", kind: "ember" }]);
+        setTimeout(() => toggleCalm(), 400);
         break;
       case "clear":
         setLog([]);

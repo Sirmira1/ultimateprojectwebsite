@@ -109,7 +109,7 @@ export default function Contact() {
           </nav>
           <span className="flex items-center gap-4">
             <span>
-              HAMILTON, ON — <LocalTime />
+              HAMILTON, ONTARIO, CANADA — <LocalTime />
             </span>
             <a href="#top" onClick={toTop} data-cursor="TOP" className="text-ink/70 transition-colors hover:text-ember">
               ↑ TOP

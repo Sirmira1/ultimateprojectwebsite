@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { world } from "@/lib/world";
+import { calmMode } from "@/lib/calm";
 
 /**
  * On touch devices, device tilt takes over the cursor's job:
@@ -11,7 +12,7 @@ import { world } from "@/lib/world";
 export default function Gyro() {
   useEffect(() => {
     if (!window.matchMedia("(pointer: coarse)").matches) return;
-    if (world.reducedMotion) return;
+    if (calmMode()) return;
     if (!("DeviceOrientationEvent" in window)) return;
 
     let baseBeta: number | null = null;

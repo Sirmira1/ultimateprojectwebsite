@@ -5,6 +5,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer, Bloom, Vignette, ChromaticAberration } from "@react-three/postprocessing";
 import * as THREE from "three";
 import { world, CAMERA_KEYS, NUM_SHAPES } from "@/lib/world";
+import { calmMode } from "@/lib/calm";
 import Particles from "./Particles";
 import Trail from "./Trail";
 
@@ -67,7 +68,7 @@ function Guard() {
 
 export default function Scene() {
   const [dpr] = useState<[number, number]>(() => [1, 1.75]);
-  const post = world.tier > 0 && !world.reducedMotion;
+  const post = world.tier > 0 && !calmMode();
 
   return (
     <div className="fixed inset-0 z-0" aria-hidden="true">

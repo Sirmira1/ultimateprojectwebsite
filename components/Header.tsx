@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { audio } from "@/lib/audio";
+import { calmChosen, toggleCalm } from "@/lib/calm";
 import Magnetic from "@/components/ui/Magnetic";
 
 const LINKS = [
@@ -31,6 +32,8 @@ function Clock() {
 
 export default function Header({ visible }: { visible: boolean }) {
   const [sound, setSound] = useState(false);
+  const [calm, setCalm] = useState(false);
+  useEffect(() => setCalm(calmChosen()), []);
 
   const go = (e: React.MouseEvent, href: string) => {
     e.preventDefault();
@@ -77,6 +80,23 @@ export default function Header({ visible }: { visible: boolean }) {
           <span className="hidden font-mono text-[10px] tracking-[0.2em] text-ink/50 md:inline">
             HAMILTON&nbsp;<Clock />
           </span>
+          <Magnetic strength={0.4}>
+            <button
+              onClick={toggleCalm}
+              className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.28em] text-ink/70 transition-colors hover:text-ink sm:flex"
+              aria-pressed={calm}
+              aria-label={calm ? "Turn effects back on" : "Calm mode: same content, no effects"}
+              title={calm ? "Bring back the full experience" : "Same content, no effects"}
+            >
+              <span
+                aria-hidden="true"
+                className={`h-2 w-2 rounded-full border border-ember transition-colors duration-300 ${
+                  calm ? "bg-transparent" : "bg-ember"
+                }`}
+              />
+              {calm ? "FULL MODE" : "CALM MODE"}
+            </button>
+          </Magnetic>
           <Magnetic strength={0.4}>
             <button
               onClick={() => window.dispatchEvent(new Event("open-terminal"))}

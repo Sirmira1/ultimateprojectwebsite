@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { RevealLines, Line, Rise, SectionLabel } from "@/components/ui/Split";
+import { calmMode } from "@/lib/calm";
 import GitHubLive from "@/components/GitHubLive";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,7 +15,7 @@ function Stat({ value, suffix, label }: { value: number; suffix: string; label: 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (calmMode()) {
       el.textContent = String(value);
       return;
     }

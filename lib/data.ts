@@ -108,7 +108,7 @@ export const CAREER: CareerEntry[] = [
   {
     period: "2026 — NOW",
     role: "Co-op Developer",
-    place: "MBPSD",
+    place: "Ministry of Public & Business Service Delivery & Procurement (MPBSDP)",
     note: "Two consecutive co-op terms through December — quality and testing focus. Learning what production software demands when real people depend on it.",
   },
   {

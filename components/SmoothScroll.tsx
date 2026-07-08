@@ -5,6 +5,7 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { world } from "@/lib/world";
+import { calmMode } from "@/lib/calm";
 
 declare global {
   interface Window {
@@ -20,7 +21,7 @@ gsap.registerPlugin(ScrollTrigger);
  */
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = calmMode();
     world.reducedMotion = reduced;
 
     const coarse = window.matchMedia("(pointer: coarse)").matches;

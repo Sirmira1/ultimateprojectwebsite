@@ -47,7 +47,7 @@ export default function OpengraphImage() {
             letterSpacing: "0.3em",
           }}
         >
-          HAMILTON, ON
+          HAMILTON, ON — CANADA
         </div>
 
         <svg
