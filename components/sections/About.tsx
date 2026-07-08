@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 import { RevealLines, Line, Rise, SectionLabel } from "@/components/ui/Split";
 import GitHubLive from "@/components/GitHubLive";
 
@@ -108,20 +109,18 @@ export default function About() {
               className="relative aspect-[4/5] w-full max-w-xs overflow-hidden rounded-sm border border-line will-change-transform"
               style={{ transformStyle: "preserve-3d" }}
             >
-              <div
-                className="absolute inset-0 opacity-90"
-                style={{
-                  background:
-                    "radial-gradient(circle at 30% 25%, #7c5cff55, transparent 55%), radial-gradient(circle at 75% 70%, #ff5c2855, transparent 50%), radial-gradient(circle at 55% 45%, #6ea8ff33, transparent 60%), #0c0a14",
-                }}
+              <Image
+                src="/img/ppp.jpg"
+                alt="Nikola Anastasijević"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 768px) 80vw, 320px"
+                priority
               />
-              <div
-                className="absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-80 blur-2xl"
-                style={{ background: "conic-gradient(from 0deg, #ff5c28, #7c5cff, #3fd2c7, #ff5c28)", animation: "spin-slow 9s linear infinite" }}
-              />
+              <div className="absolute inset-0 bg-gradient-to-t from-void/60 via-transparent to-transparent" />
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4 font-mono text-[9px] uppercase tracking-[0.22em] text-ink/70">
                 <span>SELF-PORTRAIT</span>
-                <span>RENDERED LIVE</span>
+                <span>2026</span>
               </div>
             </div>
           </Rise>

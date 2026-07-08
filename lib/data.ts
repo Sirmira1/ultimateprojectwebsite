@@ -9,6 +9,8 @@ export type Project = {
   gradient: [string, string];
   description: string;
   href?: string;
+  /** screenshot shown in the floating cursor preview */
+  image?: string;
 };
 
 export const PROJECTS: Project[] = [
@@ -23,6 +25,7 @@ export const PROJECTS: Project[] = [
     description:
       "A luxury exotic car rental platform — curated fleet browsing, a polished reservation flow, real Stripe payments, and a complete Supabase backend. Built end-to-end, shipped for real.",
     href: "https://lusso-veloce.vercel.app",
+    image: "/img/Screenshot 2026-07-02 223147.png",
   },
   {
     index: "002",
@@ -35,6 +38,7 @@ export const PROJECTS: Project[] = [
     description:
       "A driving app with live speed tracking, a global leaderboard, and a fog-of-war map — the world starts dark, and you unlock cities by actually driving through them.",
     href: "https://fly-by-rosy.vercel.app",
+    image: "/img/Screenshot 2026-07-03 143349.png",
   },
   {
     index: "003",
@@ -47,6 +51,7 @@ export const PROJECTS: Project[] = [
     description:
       "An automated trading system that reads live gold charts and makes its own long/short decisions, with a Next.js dashboard watching its every move. It trades while I sleep.",
     href: "https://tradebot-beta.vercel.app",
+    image: "/img/Screenshot 2026-07-03 135757.png",
   },
   {
     index: "004",
@@ -59,6 +64,7 @@ export const PROJECTS: Project[] = [
     description:
       "A car management app for people who love their machines — add your vehicles, log every modification with exact costs, track services, and watch total ownership spend over time.",
     href: "https://project-garage-rose.vercel.app",
+    image: "/img/Screenshot 2026-07-03 101118.png",
   },
 ];
 
@@ -130,15 +136,17 @@ export type Experiment = {
   title: string;
   medium: string;
   gradient: [string, string];
+  href?: string;
+  image?: string;
 };
 
 export const EXPERIMENTS: Experiment[] = [
-  { index: "E—01", title: "SOFT", medium: "Design study — minimal Gen Z aesthetic", gradient: ["#1b0f3d", "#c9a2ff"] },
-  { index: "E—02", title: "NOIR", medium: "Design study — high-contrast cinema", gradient: ["#12122e", "#6ea8ff"] },
-  { index: "E—03", title: "CASUAL", medium: "Design study — approachable modern", gradient: ["#231a02", "#ffb454"] },
-  { index: "E—04", title: "FOG OF WAR", medium: "Mapbox exploration mask from FlyBy", gradient: ["#032622", "#3fd2c7"] },
-  { index: "E—05", title: "BACKTEST RIG", medium: "Trading strategies, simulated overnight", gradient: ["#26043a", "#ff6ad5"] },
-  { index: "E—06", title: "THE OBSERVATORY", medium: "This website — 16,000 particles deep", gradient: ["#2d0a02", "#ff5c28"] },
+  { index: "E—01", title: "SOFT", medium: "Design study — minimal Gen Z aesthetic", gradient: ["#1b0f3d", "#c9a2ff"], href: "https://soft-design.vercel.app/", image: "/img/Screenshot 2026-07-03 095957.png" },
+  { index: "E—02", title: "NOIR", medium: "Design study — high-contrast cinema", gradient: ["#12122e", "#6ea8ff"], href: "https://mysterious-design.vercel.app/", image: "/img/Screenshot 2026-07-03 100331.png" },
+  { index: "E—03", title: "CASUAL", medium: "Design study — approachable modern", gradient: ["#231a02", "#ffb454"], href: "https://casual-design-five.vercel.app/", image: "/img/Screenshot 2026-07-03 100054.png" },
+  { index: "E—04", title: "FOG OF WAR", medium: "Mapbox exploration mask from FlyBy", gradient: ["#032622", "#3fd2c7"], image: "/img/Screenshot 2026-07-08 112150.png" },
+  { index: "E—05", title: "BACKTEST RIG", medium: "Trading strategies, simulated overnight", gradient: ["#26043a", "#ff6ad5"], image: "/img/Screenshot 2026-07-08 112603.png" },
+  { index: "E—06", title: "THE OBSERVATORY", medium: "This website — 16,000 particles deep", gradient: ["#2d0a02", "#ff5c28"], image: "/img/Screenshot 2026-07-08 112400.png" },
 ];
 
 export const SOCIALS = [
@@ -147,4 +155,4 @@ export const SOCIALS = [
   { label: "Website", href: "https://www.nikolaanastasijevic.com" },
 ];
 
-export const EMAIL = "nikolaanastasijevic3@gmail.com";
+export const EMAIL = "nikolaanastasijevic0@gmail.com";

@@ -30,7 +30,7 @@ function ExperimentCard({ e }: { e: (typeof EXPERIMENTS)[number] }) {
       gsap.to(ref.current, { rotateX: 0, rotateY: 0, scale: 1, duration: 0.9, ease: "elastic.out(1,0.45)" });
   };
 
-  return (
+  const inner = (
     <div
       ref={ref}
       onPointerMove={tilt}
@@ -39,12 +39,29 @@ function ExperimentCard({ e }: { e: (typeof EXPERIMENTS)[number] }) {
       className="group relative h-[58vh] w-[78vw] shrink-0 overflow-hidden rounded-sm border border-line will-change-transform sm:w-[46vw] lg:w-[30vw]"
       style={{ transformStyle: "preserve-3d" }}
     >
-      <div
-        className="absolute inset-0 transition-transform duration-700 group-hover:scale-110"
-        style={{
-          background: `radial-gradient(circle at 30% 25%, ${e.gradient[1]}66, transparent 60%), radial-gradient(circle at 75% 80%, ${e.gradient[1]}33, transparent 55%), linear-gradient(155deg, ${e.gradient[0]}, #08070b 90%)`,
-        }}
-      />
+      {e.image ? (
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={e.image}
+            alt={e.title}
+            className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(155deg, ${e.gradient[0]}cc, transparent 60%), linear-gradient(to top, ${e.gradient[0]}dd 0%, transparent 55%)`,
+            }}
+          />
+        </>
+      ) : (
+        <div
+          className="absolute inset-0 transition-transform duration-700 group-hover:scale-110"
+          style={{
+            background: `radial-gradient(circle at 30% 25%, ${e.gradient[1]}66, transparent 60%), radial-gradient(circle at 75% 80%, ${e.gradient[1]}33, transparent 55%), linear-gradient(155deg, ${e.gradient[0]}, #08070b 90%)`,
+          }}
+        />
+      )}
       {/* drifting light bar */}
       <div
         aria-hidden="true"
@@ -70,6 +87,15 @@ function ExperimentCard({ e }: { e: (typeof EXPERIMENTS)[number] }) {
       </div>
     </div>
   );
+
+  if (e.href) {
+    return (
+      <a href={e.href} target="_blank" rel="noreferrer">
+        {inner}
+      </a>
+    );
+  }
+  return inner;
 }
 
 export default function Playground() {

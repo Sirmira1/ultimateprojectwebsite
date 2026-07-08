@@ -65,7 +65,7 @@ export default function Hero() {
             viewport={{ once: true, margin: "0px 0px -30% 0px" }}
             transition={{ duration: 0.7, delay: 0.35, ease: [0.34, 1.56, 0.64, 1] }}
           >
-            &amp;
+            
           </motion.span>
           <SplitChars text="shipped" as="span" delay={0.6} stagger={0.045} className="text-ember" />
         </span>

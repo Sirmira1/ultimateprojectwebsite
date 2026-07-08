@@ -153,20 +153,37 @@ export default function Projects() {
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="relative h-56 w-96 overflow-hidden rounded-sm border border-ink/10"
             >
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: `radial-gradient(circle at 25% 20%, ${active.gradient[1]}cc, transparent 60%), radial-gradient(circle at 80% 85%, ${active.gradient[1]}66, transparent 55%), linear-gradient(160deg, ${active.gradient[0]}, #08070b 85%)`,
-                }}
-              />
-              <motion.div
-                className="absolute -inset-1/2 opacity-50 mix-blend-screen"
-                style={{
-                  background: `conic-gradient(from 0deg at 50% 50%, transparent, ${active.gradient[1]}55, transparent 30%)`,
-                }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
-              />
+              {active.image ? (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={active.image}
+                    alt={active.title}
+                    className="absolute inset-0 h-full w-full object-cover object-top"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: `linear-gradient(160deg, ${active.gradient[0]}99, transparent 60%), linear-gradient(to top, ${active.gradient[0]}cc 0%, transparent 50%)` }}
+                  />
+                </>
+              ) : (
+                <>
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `radial-gradient(circle at 25% 20%, ${active.gradient[1]}cc, transparent 60%), radial-gradient(circle at 80% 85%, ${active.gradient[1]}66, transparent 55%), linear-gradient(160deg, ${active.gradient[0]}, #08070b 85%)`,
+                    }}
+                  />
+                  <motion.div
+                    className="absolute -inset-1/2 opacity-50 mix-blend-screen"
+                    style={{
+                      background: `conic-gradient(from 0deg at 50% 50%, transparent, ${active.gradient[1]}55, transparent 30%)`,
+                    }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
+                  />
+                </>
+              )}
               <div className="absolute inset-0 flex flex-col justify-between p-4 font-mono text-[9px] uppercase tracking-[0.25em] text-ink/90">
                 <div className="flex justify-between">
                   <span>{active.index}</span>
