@@ -86,7 +86,7 @@ export default function About() {
             Nikola Anastasijević — software development student at Mohawk
           </Line>
           <Line className="font-mono text-sm font-normal leading-relaxed tracking-normal text-dim lg:text-base">
-            College, co-op developer at MBPSD. I build web apps end-to-end
+            College, co-op developer at MPBSDP. I build web apps end-to-end
           </Line>
           <Line className="font-mono text-sm font-normal leading-relaxed tracking-normal text-dim lg:text-base">
             and actually ship them: rentals with real payments, apps with
@@ -128,7 +128,7 @@ export default function About() {
           <Rise delay={0.25} className="flex flex-col gap-3 font-mono text-xs leading-relaxed tracking-wide text-dim">
             {[
               ["BASE", "Hamilton, Ontario"],
-              ["NOW", "Co-op @ MBPSD / Mohawk"],
+              ["NOW", "Co-op @ MPBSDP / Mohawk"],
               ["FOCUS", "Web apps, end-to-end"],
               ["BELIEF", "Finish the thing"],
             ].map(([k, v]) => (
