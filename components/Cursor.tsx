@@ -64,11 +64,11 @@ export default function Cursor() {
       if (tag) {
         targetScale = 3.2;
         setLabel(tag);
+        audio.hover(); // only the big, labeled targets speak
       } else {
         targetScale = 1.9;
         setLabel("");
       }
-      audio.hover();
     };
 
     const onOut = (e: PointerEvent) => {

@@ -66,40 +66,47 @@ class AudioEngine {
     return this.enabled;
   }
 
+  /** A soft, felt "tup" — low, quiet, almost subliminal. */
   hover() {
     if (!this.enabled || !this.ctx || !this.master) return;
     const now = performance.now();
-    if (now - this.lastBlip < 70) return;
+    if (now - this.lastBlip < 140) return;
     this.lastBlip = now;
     const t = this.ctx.currentTime;
-    const osc = this.ctx.createOscillator();
-    osc.type = "sine";
-    const f = 900 + Math.random() * 500;
-    osc.frequency.setValueAtTime(f, t);
-    osc.frequency.exponentialRampToValueAtTime(f * 0.55, t + 0.09);
-    const g = this.ctx.createGain();
-    g.gain.setValueAtTime(0.055, t);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.11);
-    osc.connect(g);
-    g.connect(this.master);
-    osc.start(t);
-    osc.stop(t + 0.12);
+    const f = 175 + Math.random() * 30;
+    for (const [freq, gain] of [
+      [f, 0.026],
+      [f * 1.5, 0.009],
+    ] as const) {
+      const osc = this.ctx.createOscillator();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, t);
+      osc.frequency.exponentialRampToValueAtTime(freq * 0.82, t + 0.07);
+      const g = this.ctx.createGain();
+      g.gain.setValueAtTime(gain, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.08);
+      osc.connect(g);
+      g.connect(this.master);
+      osc.start(t);
+      osc.stop(t + 0.09);
+    }
   }
 
+  /** A muted thump, like a key on a felted piano. */
   click() {
     if (!this.enabled || !this.ctx || !this.master) return;
     const t = this.ctx.currentTime;
     const osc = this.ctx.createOscillator();
-    osc.type = "triangle";
-    osc.frequency.setValueAtTime(320, t);
-    osc.frequency.exponentialRampToValueAtTime(140, t + 0.16);
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(135, t);
+    osc.frequency.exponentialRampToValueAtTime(85, t + 0.12);
     const g = this.ctx.createGain();
-    g.gain.setValueAtTime(0.09, t);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.2);
+    g.gain.setValueAtTime(0.05, t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
     osc.connect(g);
     g.connect(this.master);
     osc.start(t);
-    osc.stop(t + 0.22);
+    osc.stop(t + 0.18);
   }
 }
 

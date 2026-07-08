@@ -62,8 +62,8 @@ export default function Hero() {
             className="mx-3 inline-block not-italic text-ember"
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.75, ease: [0.34, 1.56, 0.64, 1] }}
+            viewport={{ once: true, margin: "0px 0px -30% 0px" }}
+            transition={{ duration: 0.7, delay: 0.35, ease: [0.34, 1.56, 0.64, 1] }}
           >
             &amp;
           </motion.span>
@@ -83,15 +83,10 @@ export default function Hero() {
           <br />
           <span className="text-ink/80">SOFTWARE DEVELOPER</span> — I FINISH THE THING
         </span>
-        <span className="flex flex-col items-end gap-3">
-          <span>KEEP GOING</span>
-          <span className="relative h-12 w-px overflow-hidden bg-ink/15" aria-hidden="true">
-            <motion.span
-              className="absolute left-0 top-0 h-4 w-px bg-ember"
-              animate={{ y: [-16, 48] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </span>
+        <span className="hidden text-right leading-relaxed sm:block">
+          EST. HAMILTON, ON
+          <br />
+          <span className="text-ink/50">SHIPPING SINCE DAY ZERO</span>
         </span>
       </motion.div>
     </section>

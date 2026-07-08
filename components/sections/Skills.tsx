@@ -2,7 +2,6 @@
 
 import { SKILLS } from "@/lib/data";
 import { SectionLabel, Rise } from "@/components/ui/Split";
-import { audio } from "@/lib/audio";
 
 const MARQUEE = [
   "TYPESCRIPT", "PYTHON", "C#", "REACT", "NEXT.JS", "REACT NATIVE",
@@ -46,7 +45,6 @@ export default function Skills() {
                 {group.items.map((item) => (
                   <span
                     key={item}
-                    onPointerEnter={() => audio.hover()}
                     className="text-stroke cursor-default font-display text-4xl font-bold tracking-tight transition-colors duration-300 hover:text-ink md:text-6xl"
                   >
                     {item}

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { EXPERIMENTS } from "@/lib/data";
-import { audio } from "@/lib/audio";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,7 +34,6 @@ function ExperimentCard({ e }: { e: (typeof EXPERIMENTS)[number] }) {
     <div
       ref={ref}
       onPointerMove={tilt}
-      onPointerEnter={() => audio.hover()}
       onPointerLeave={untilt}
       data-cursor="PLAY"
       className="group relative h-[58vh] w-[78vw] shrink-0 overflow-hidden rounded-sm border border-line will-change-transform sm:w-[46vw] lg:w-[30vw]"
@@ -130,11 +128,8 @@ export default function Playground() {
             </h2>
             <p className="max-w-xs font-mono text-xs leading-relaxed text-dim">
               Experiments with no client, no brief, no deadline. This is where
-              the techniques in my client work are born.
+              the techniques in the real work are born.
             </p>
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink/50">
-              Keep scrolling →
-            </span>
           </div>
 
           {EXPERIMENTS.map((e) => (

@@ -30,7 +30,7 @@ export default function Home() {
       <Header visible={started} />
 
       <main id="main" className="relative z-10">
-        <Intro started={started} />
+        <Intro />
         <Hero />
         <About />
         <Projects />
