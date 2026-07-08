@@ -122,7 +122,7 @@ export default function Intro() {
               stroke={p.ember ? "#ff5c28" : "#ece7df"}
               strokeWidth={p.ember ? 2 : 2.5}
               strokeLinecap="round"
-              opacity={p.ember ? 0.5 : 0.28}
+              opacity={0}
             />
           ))}
         </svg>
