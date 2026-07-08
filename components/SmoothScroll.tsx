@@ -99,6 +99,17 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     }, 60);
     window.addEventListener("pointermove", onPointer, { passive: true });
 
+    // every click detonates a shockwave in the particle field
+    const onDown = (e: PointerEvent) => {
+      world.clickAt = {
+        x: (e.clientX / window.innerWidth) * 2 - 1,
+        y: -(e.clientY / window.innerHeight) * 2 + 1,
+        t: performance.now() / 1000,
+        power: 1,
+      };
+    };
+    window.addEventListener("pointerdown", onDown, { passive: true });
+
     /* ---- measurement lifecycle ---- */
     measure();
     onScroll(window.scrollY, 0);
@@ -115,6 +126,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       window.clearTimeout(settle);
       window.clearInterval(decay);
       window.removeEventListener("pointermove", onPointer);
+      window.removeEventListener("pointerdown", onDown);
       window.removeEventListener("resize", onRefresh);
       window.removeEventListener("scroll", nativeScroll);
       ScrollTrigger.removeEventListener("refresh", onRefresh);

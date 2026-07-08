@@ -6,6 +6,7 @@ import { EffectComposer, Bloom, Vignette, ChromaticAberration } from "@react-thr
 import * as THREE from "three";
 import { world, CAMERA_KEYS, NUM_SHAPES } from "@/lib/world";
 import Particles from "./Particles";
+import Trail from "./Trail";
 
 function CameraRig() {
   const targetPos = useMemo(() => new THREE.Vector3(), []);
@@ -83,6 +84,7 @@ export default function Scene() {
       >
         <Suspense fallback={null}>
           <Particles />
+          <Trail />
           <CameraRig />
           <Guard />
           {post && <PostFX />}

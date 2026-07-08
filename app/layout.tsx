@@ -25,9 +25,23 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.nikolaanastasijevic.com"),
   title: "NIKOLA ANASTASIJEVIĆ — Developer. I ship things.",
   description:
     "Software developer in Hamilton, ON. Web apps built end-to-end and actually shipped — Lusso Veloce, FlyBy, Project Garage, and a bot that trades gold. This portfolio is the playground.",
+  openGraph: {
+    title: "NIKOLA ANASTASIJEVIĆ — Developer. I ship things.",
+    description:
+      "An interactive observatory of shipped work. 16,000 particles, one signature, zero templates.",
+    type: "website",
+    locale: "en_CA",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NIKOLA ANASTASIJEVIĆ — Developer. I ship things.",
+    description:
+      "An interactive observatory of shipped work. 16,000 particles, one signature, zero templates.",
+  },
 };
 
 export const viewport: Viewport = {

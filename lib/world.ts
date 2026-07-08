@@ -61,6 +61,10 @@ type WorldState = {
   sigDraw: number;
   /** accent override while hovering a project (hex) or null */
   accent: string | null;
+  /** last click: NDC coords + timestamp (s) + power (1 = click, >1 = boom) */
+  clickAt: { x: number; y: number; t: number; power: number };
+  /** queued visitor-signature strokes (world-space xyz triplets) for the trail system */
+  markQueue: Float32Array[];
   /** true once the preloader has finished revealing */
   started: boolean;
   reducedMotion: boolean;
@@ -76,6 +80,8 @@ export const world: WorldState = {
   mouseVel: 0,
   sigDraw: 0,
   accent: null,
+  clickAt: { x: 0, y: 0, t: -100, power: 0 },
+  markQueue: [],
   started: false,
   reducedMotion: false,
   tier: 1,

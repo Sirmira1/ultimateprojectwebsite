@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { RevealLines, Line, Rise, SectionLabel } from "@/components/ui/Split";
+import GitHubLive from "@/components/GitHubLive";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -147,6 +148,8 @@ export default function About() {
         <Stat value={2} suffix="" label="Co-op terms" />
         <Stat value={1} suffix="" label="Bot trading gold" />
       </div>
+
+      <GitHubLive />
     </section>
   );
 }

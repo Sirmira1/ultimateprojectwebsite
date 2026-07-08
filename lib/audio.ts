@@ -8,6 +8,8 @@ class AudioEngine {
   private ctx: AudioContext | null = null;
   private master: GainNode | null = null;
   private ambient: GainNode | null = null;
+  private analyser: AnalyserNode | null = null;
+  private freqData: Uint8Array<ArrayBuffer> | null = null;
   private lastBlip = 0;
   enabled = false;
 
@@ -18,6 +20,13 @@ class AudioEngine {
     this.master = this.ctx.createGain();
     this.master.gain.value = 0;
     this.master.connect(this.ctx.destination);
+
+    // analyser tap — lets the particle field breathe with the sound
+    this.analyser = this.ctx.createAnalyser();
+    this.analyser.fftSize = 128;
+    this.analyser.smoothingTimeConstant = 0.85;
+    this.freqData = new Uint8Array(this.analyser.frequencyBinCount);
+    this.master.connect(this.analyser);
 
     // ambient bed
     const amb = this.ctx.createGain();
@@ -64,6 +73,17 @@ class AudioEngine {
     this.master.gain.cancelScheduledValues(t);
     this.master.gain.setTargetAtTime(this.enabled ? 0.8 : 0, t, 0.4);
     return this.enabled;
+  }
+
+  /** Current output level 0..1 — 0 when sound is off. */
+  level(): number {
+    if (!this.enabled || !this.analyser || !this.freqData) return 0;
+    this.analyser.getByteFrequencyData(this.freqData);
+    // the drone lives in the low bins; blips reach higher — weigh both
+    let sum = 0;
+    const n = Math.min(24, this.freqData.length);
+    for (let i = 0; i < n; i++) sum += this.freqData[i];
+    return Math.min((sum / n / 255) * 2.2, 1);
   }
 
   /** A soft, felt "tup" — low, quiet, almost subliminal. */

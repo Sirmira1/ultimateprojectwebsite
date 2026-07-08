@@ -79,6 +79,15 @@ export default function Header({ visible }: { visible: boolean }) {
           </span>
           <Magnetic strength={0.4}>
             <button
+              onClick={() => window.dispatchEvent(new Event("open-terminal"))}
+              className="hidden font-mono text-[10px] uppercase tracking-[0.28em] text-ink/70 transition-colors hover:text-ink sm:inline"
+              aria-label="Open console"
+            >
+              <span className="text-ember">/</span>&nbsp;CONSOLE
+            </button>
+          </Magnetic>
+          <Magnetic strength={0.4}>
+            <button
               onClick={() => setSound(audio.toggle())}
               className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.28em] text-ink/70 transition-colors hover:text-ink"
               aria-pressed={sound}

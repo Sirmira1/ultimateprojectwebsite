@@ -77,6 +77,17 @@ export default function Contact() {
             Usually replies within 24h — open to co-ops, freelance builds & good problems
           </span>
         </Rise>
+
+        <Rise delay={0.4}>
+          <button
+            onClick={() => window.dispatchEvent(new Event("open-guestbook"))}
+            data-cursor="SIGN"
+            className="group flex items-center gap-4 border border-ink/20 px-8 py-4 font-mono text-[10px] uppercase tracking-[0.3em] text-dim transition-all duration-500 hover:border-ember hover:text-ink"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-ember transition-transform duration-500 group-hover:scale-150" />
+            You&rsquo;ve seen my signature — leave yours
+          </button>
+        </Rise>
       </div>
 
       <footer className="mx-auto mt-[12vh] w-full max-w-[1400px] border-t border-line py-6">

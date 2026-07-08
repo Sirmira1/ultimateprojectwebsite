@@ -6,6 +6,9 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
 import Cursor from "@/components/Cursor";
 import Header from "@/components/Header";
+import Terminal from "@/components/Terminal";
+import Guestbook from "@/components/Guestbook";
+import Gyro from "@/components/Gyro";
 import Intro from "@/components/sections/Intro";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
@@ -28,6 +31,9 @@ export default function Home() {
       <Preloader onDone={onPreloaderDone} />
       <Cursor />
       <Header visible={started} />
+      <Terminal />
+      <Guestbook />
+      <Gyro />
 
       <main id="main" className="relative z-10">
         <Intro />

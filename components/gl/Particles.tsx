@@ -5,6 +5,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { world, NUM_SHAPES, SECTION_PALETTES, SECTION_OPACITY } from "@/lib/world";
 import { sampleSignature } from "@/lib/signature";
+import { audio } from "@/lib/audio";
 
 /* ------------------------------------------------------------------ */
 /*  Shape generation — every section is a formation of the same        */
@@ -212,6 +213,9 @@ uniform float uForce;
 uniform float uVel;
 uniform float uDraw;
 uniform vec3 uMouse;
+uniform vec3 uClickPos;
+uniform float uClickTime;
+uniform float uClickPower;
 attribute vec2 aRef;
 attribute float aRand;
 attribute float aT;
@@ -273,6 +277,18 @@ void main() {
   vec3 d = pos - uMouse;
   float force = exp(-dot(d, d) / 2.4) * uForce;
   pos += normalize(d + vec3(0.0001)) * force;
+
+  // click shockwave — an expanding ring of displacement + light
+  float ct = uTime - uClickTime;
+  if (ct > 0.0 && ct < 2.5 && uClickPower > 0.0) {
+    vec3 cd = pos - uClickPos;
+    float cdist = length(cd);
+    float ring = ct * 7.0;
+    float band = exp(-pow(cdist - ring, 2.0) * 2.2);
+    float decay = exp(-ct * 2.2) * uClickPower;
+    pos += normalize(cd + vec3(0.0001)) * band * decay * 0.9;
+    force += band * decay * 0.5;
+  }
 
   // intro: particles fall in from a distant shell
   float ti = clamp((uIntro - aRand * 0.35) / 0.65, 0.0, 1.0);
@@ -356,6 +372,9 @@ export default function Particles() {
         uVel: { value: 0 },
         uDraw: { value: 0 },
         uMouse: { value: new THREE.Vector3(999, 999, 0) },
+        uClickPos: { value: new THREE.Vector3(0, 0, 0) },
+        uClickTime: { value: -100 },
+        uClickPower: { value: 0 },
         uColorA: { value: new THREE.Color(SECTION_PALETTES[0][0]) },
         uColorB: { value: new THREE.Color(SECTION_PALETTES[0][1]) },
         uOpacity: { value: 1 },
@@ -372,6 +391,8 @@ export default function Particles() {
   const tmpB = useMemo(() => new THREE.Color(), []);
   const mouse3 = useMemo(() => new THREE.Vector3(), []);
   const proj = useMemo(() => new THREE.Vector3(), []);
+  const lastClick = useRef(-100);
+  const audioLvl = useRef(0);
 
   useFrame(({ camera, clock }, dt) => {
     const u = material.uniforms;
@@ -396,6 +417,21 @@ export default function Particles() {
     // the pen follows the intro's scrub closely
     const drawTarget = rm ? 1 : world.sigDraw;
     u.uDraw.value += (drawTarget - u.uDraw.value) * (1 - Math.exp(-8 * delta));
+
+    // new click → project into world space and detonate
+    if (!rm && world.clickAt.t !== lastClick.current) {
+      lastClick.current = world.clickAt.t;
+      proj.set(world.clickAt.x, world.clickAt.y, 0.5).unproject(camera);
+      proj.sub(camera.position).normalize();
+      const ct = -camera.position.z / (proj.z || -1);
+      if (ct > 0) {
+        (u.uClickPos.value as THREE.Vector3)
+          .copy(camera.position)
+          .addScaledVector(proj, ct);
+        u.uClickTime.value = u.uTime.value;
+        u.uClickPower.value = world.clickAt.power;
+      }
+    }
 
     // cursor in world space, projected onto the z=0 plane
     if (!rm) {
@@ -427,9 +463,14 @@ export default function Particles() {
     (u.uColorA.value as THREE.Color).lerp(tmpA, 1 - Math.exp(-3.5 * delta));
     (u.uColorB.value as THREE.Color).lerp(tmpB, 1 - Math.exp(-3.5 * delta));
 
-    // the field recedes while you read, returns when the type thins out
-    const targetOpacity = THREE.MathUtils.lerp(SECTION_OPACITY[i0], SECTION_OPACITY[i1], f);
+    // the field recedes while you read, returns when the type thins out —
+    // and when sound is on, it breathes with the drone
+    audioLvl.current += (audio.level() - audioLvl.current) * (1 - Math.exp(-4 * delta));
+    const targetOpacity =
+      THREE.MathUtils.lerp(SECTION_OPACITY[i0], SECTION_OPACITY[i1], f) *
+      (1 + audioLvl.current * 0.45);
     u.uOpacity.value += (targetOpacity - u.uOpacity.value) * (1 - Math.exp(-3 * delta));
+    u.uSize.value = 34 * (1 + audioLvl.current * 0.18);
   });
 
   return <points ref={points} geometry={geometry} material={material} frustumCulled={false} />;
